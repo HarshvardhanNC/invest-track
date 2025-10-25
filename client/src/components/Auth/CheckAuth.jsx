@@ -1,22 +1,23 @@
-import React, { Children } from 'react'
-import { Navigate,useLocation,  } from 'react-router-dom'
+import React from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
 
-function CheckAuth({user, loading}) {
-  if (loading) return <div>Loading...</div>
-    if (!user&& !(location.pathname.includes('login') || location.pathname.includes('register'))) {
-      // If user is not logged in and trying to access a protected route
-      // Redirect to login or show a message
-        return  <Navigate to='/auth/login'/>
-    }
-    if (user && (location.pathname.includes('login') || location.pathname.includes('register'))){
-        
-            return <Navigate to='/dashboard'/>
-    }
-  return (
-    <div>
-      {Children}
-    </div>
-  )
+function CheckAuth({ user, loading, children }) {
+  const location = useLocation();
+
+  if (loading) return <div>Loading...</div>;
+
+  // If user is not logged in and trying to access a protected route
+  if (!user && !(location.pathname.includes('login') || location.pathname.includes('register'))) {
+    return <Navigate to='/auth/login' />;
+  }
+
+  // If user is logged in and trying to access login/register
+  if (user && (location.pathname.includes('login') || location.pathname.includes('register'))) {
+    return <Navigate to='/dashboard' />;
+  }
+
+  // Render the nested content
+  return <>{children}</>;
 }
 
-export default CheckAuth
+export default CheckAuth;

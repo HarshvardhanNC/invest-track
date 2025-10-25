@@ -8,8 +8,8 @@ function Auth() {
         
         {/* Left Side */}
         <div className="bg-black text-white flex flex-col justify-center items-center p-10">
-          <h1 className="text-4xl font-extrabold mb-4 text-center">Welcome to Expense Tracker</h1>
-          <p className="text-lg text-center">Manage your expenses smarter. Please login or register to continue.</p>
+          <h1 className="text-4xl font-extrabold mb-4 text-center">Welcome to Investment Tracker</h1>
+          <p className="text-lg text-center">Manage your investments smarter. Please login or register to continue.</p>
         </div>
 
         {/* Right Side (Login / Register Forms via <Outlet />) */}

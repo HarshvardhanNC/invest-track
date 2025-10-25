@@ -69,7 +69,8 @@ export function AuthProvider({ children }) {
       loading, 
       login, 
       register, 
-      logout 
+      logout ,
+      isLoggedIn: !!user,
     }}>
       {children}
     </AuthContext.Provider>
