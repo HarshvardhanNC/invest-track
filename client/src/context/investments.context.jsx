@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import axios from "axios";
+import apiClient from "../config/api";
 import { AuthContext } from "./auth.context";
 
 export const InvestmentsContext = createContext();
@@ -23,12 +23,7 @@ export function InvestmentsProvider({ children }) {
     setError(null);
 
     try {
-      const response = await axios.get("/api/investments/", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await apiClient.get("/investments/");
       setInvestments(response.data);
     } catch (err) {
       console.error("❌ Error fetching investments:", err);
@@ -45,12 +40,7 @@ export function InvestmentsProvider({ children }) {
     if (!token) return;
 
     try {
-      const response = await axios.post("/api/investments", investmentData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await apiClient.post("/investments", investmentData);
       setInvestments((prev) => [...prev, response.data]);
     } catch (error) {
       console.error("❌ Error adding investment:", error);
@@ -61,9 +51,7 @@ export function InvestmentsProvider({ children }) {
     if (!token) return;
 
     try {
-      await axios.delete(`/api/investments/${investmentId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await apiClient.delete(`/investments/${investmentId}`);
 
       // Remove from state
       setInvestments((prev) => prev.filter((inv) => inv._id !== investmentId));
@@ -77,15 +65,9 @@ export function InvestmentsProvider({ children }) {
     if (!token) return;
 
     try {
-      const response = await axios.put(
-        `/api/investments/${investmentId}`,
-        updatedData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
+      const response = await apiClient.put(
+        `/investments/${investmentId}`,
+        updatedData
       );
 
       // Update state
@@ -103,9 +85,7 @@ export function InvestmentsProvider({ children }) {
     if (!token) return;
 
     try {
-      const response = await axios.get(`/api/investments/${investmentId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await apiClient.get(`/investments/${investmentId}`);
 
       console.log("🔍 Single Investment:", response.data);
       return response.data;

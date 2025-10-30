@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import apiClient from '../config/api';
 
 export const AuthContext = createContext();
 
@@ -13,9 +13,7 @@ export function AuthProvider({ children }) {
       const token = localStorage.getItem('token');
       if (token) {
         try {
-          const response = await axios.get('/api/auth/validate', {
-            headers: { Authorization: `Bearer ${token}` }
-          });
+          const response = await apiClient.get('/auth/validate');
           setUser(response.data.user);
         } catch (error) {
           console.error('Token validation failed:', error);
@@ -30,7 +28,7 @@ export function AuthProvider({ children }) {
 
   const login = async (credentials) => {
     try {
-      const response = await axios.post('/api/auth/login', credentials);
+      const response = await apiClient.post('/auth/login', credentials);
       const { token, user } = await response.data;
       
       localStorage.setItem('token', token);
@@ -47,7 +45,7 @@ export function AuthProvider({ children }) {
 
   const register = async (userInfo) => {
     try {
-      const response = await axios.post('/api/auth/register', userInfo);
+      const response = await apiClient.post('/auth/register', userInfo);
       return { success: true };
     } catch (error) {
       console.error('Registration failed:', error);
