@@ -69,7 +69,7 @@ export default function Register() {
             name="username"
             value={formData.username}
             onChange={handleChange}
-            className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-zinc-500"
+            className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-zinc-500 text-black bg-white"
             required
             minLength={3}
           />
@@ -82,7 +82,7 @@ export default function Register() {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-zinc-500"
+            className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-zinc-500 text-black bg-white"
             required
           />
         </div>
@@ -94,7 +94,7 @@ export default function Register() {
             name="password"
             value={formData.password}
             onChange={handleChange}
-            className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-zinc-500"
+            className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-zinc-500 text-black bg-white"
             required
             minLength={6}
           />

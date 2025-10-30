@@ -55,7 +55,7 @@ export default function Login() {
             name="email" 
             value={credentials.email}
             onChange={(e) => setCredentials({ ...credentials, email: e.target.value })}
-            className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-zinc-500"
+            className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-zinc-500 text-black bg-white"
             required 
           />
         </div>
@@ -68,7 +68,7 @@ export default function Login() {
             value={credentials.password}
             onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
             autoComplete="current-password"
-            className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-zinc-500"
+            className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-zinc-500 text-black bg-white"
             required 
           />
         </div>
