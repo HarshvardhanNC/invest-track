@@ -64,15 +64,16 @@ const login = async(req,res)=>{
                 id:checkUser.id,
                 username:checkUser.username
             },
-            'password_client_for_jwt',
+            process.env.JWT_SECRET || 'password_client_for_jwt',
             {
                 expiresIn:'1d'
             }
         )
 
-        res.cookie('token',token,{httpOnly:true,secure:false}).json({
+        res.status(200).json({
             success:true,
             message:'loggedIn successfully',
+            token: token,
             user:{
                 email:checkUser.email,
                 id:checkUser.id,

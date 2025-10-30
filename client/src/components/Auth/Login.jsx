@@ -1,9 +1,10 @@
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../context/auth.context';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const { login, user } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [credentials, setCredentials] = useState({ email: '', password: '' });
@@ -25,12 +26,13 @@ export default function Login() {
       });
       
       if (result.success) {
-        Navigate('/dashboard');
+        navigate('/dashboard');
       } else {
         setError(result.message || 'Login failed');
       }
     } catch (err) {
-      setError('An unexpected error occurred');
+      console.error('Login error:', err);
+      setError(err.message || 'An unexpected error occurred');
     } finally {
       setLoading(false);
     }
